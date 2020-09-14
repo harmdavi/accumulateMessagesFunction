@@ -2,7 +2,9 @@
 'RCET0265
 'Fall 2020
 'accumulateMessageFunction
-'
+'https://github.com/harmdavi/accumulateMessagesFunction.git
+
+' Lane Coleman helped a frazzled David complete this 
 
 
 Option Strict On
