@@ -1,4 +1,4 @@
-﻿'David Harmon 
+'David Harmon 
 'RCET0265
 'Fall 2020
 'accumulateMessageFunction
@@ -11,11 +11,13 @@ Option Strict On
 Option Explicit On
 Option Compare Text
 
-Module accumulateMessagesFunction
+Module AccumulateMessagesFunction ' Solution, Project, Module, Method names all PascalCase - TJR
 
     Sub Main()
         Dim message, userInput As String
         Dim clearMemory As Boolean
+
+        'format long string for readability- TJR
         Console.WriteLine($"Hello User! I am a message save device.
 I have been programed to save any information you would like to be stored for you at any time!
 Simply type what you would like and press enter. This will save your message. 
@@ -23,33 +25,34 @@ If you would like to recall all of your messages, type the word call and your sa
 If you would like to clear your messages, simply type clear.
 If you would like to quit the message program press q at any time.")
 
-        Do
-
+        Do 'changed logic slightly - TJR
             userInput = Console.ReadLine()
             If userInput = "call" Then
+                message = AccumulateMessagesFunction("", False)
                 MsgBox(message)
             ElseIf userInput = "clear" Then
-                clearMemory = True
+                'clearMemory = True
+                message = AccumulateMessagesFunction("", True)
             ElseIf userInput = "q" Then
                 Exit Sub
-
+            Else
+                message = AccumulateMessagesFunction(userInput, clearMemory)
             End If
-            message = accumulateMessagesFunction(userInput, clearMemory)
-
-            clearMemory = False
+            'clearMemory = False
         Loop
 
-
+        'Remove extra blank lines - TJR
 
     End Sub
-    Function accumulateMessagesFunction(ByVal incommingMessage As String, ByVal clear As Boolean) As String
-        Static savedMessage As String
 
+    'made more generic. suggestion only - TJR
+    Function AccumulateMessagesFunction(ByVal incommingMessage As String, ByVal clear As Boolean) As String
+        Static savedMessage As String
         If clear Then
             savedMessage = ""
-        ElseIf incommingMessage = "call" Then
+            'ElseIf incommingMessage = "call" Then
             'nothing is placed here so that the text box will not have the word call in it when displayed 
-        Else
+        ElseIf incommingMessage <> "" Then
             savedMessage &= incommingMessage & vbNewLine
         End If
         Return savedMessage
